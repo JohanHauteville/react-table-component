@@ -10,7 +10,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Table data={EMPLOYEES_DATA} listToDisplay={LIST_TO_DISPLAY} />
+    <Table
+      tableTitle={"Employees"}
+      data={EMPLOYEES_DATA}
+      listToDisplay={LIST_TO_DISPLAY}
+      rowPagination={10}
+    />
   </React.StrictMode>
 );
 
