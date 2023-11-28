@@ -15,6 +15,9 @@ root.render(
       data={EMPLOYEES_DATA}
       listToDisplay={LIST_TO_DISPLAY}
       rowPagination={10}
+      labelPerPage={"Employees"}
+      // fontHeaderColor={"#fff"}
+      classHeader={"new-class-header"}
     />
   </React.StrictMode>
 );
