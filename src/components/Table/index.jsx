@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import "./styles.scss";
 
 function Table({
@@ -15,13 +15,22 @@ function Table({
     rowPagination ? rowPagination : 10
   );
   const [arrayOfData, setArrayOfData] = useState(data ? data : null);
-  const [arrayOfDataToDisplay, setArrayOfDataToDisplay] = useState(
-    arrayOfData ? arrayOfData : null
-  );
+
   const [currentPage, setCurrentPage] = useState(1);
   const [indexOfLastItem, setIndexOfLastItem] = useState(0);
   const [indexOfFirstItem, setIndexOfFirstItem] = useState(0);
-  const [maxPageOfItems, setMaxPageOfItems] = useState(0);
+  const [maxPageOfItems, setMaxPageOfItems] = useState(
+    data ? parseInt(data.length / itemPerPage) : null
+  );
+  // const [arrayOfDataToDisplay, setArrayOfDataToDisplay] = useState(
+  //   arrayOfData ? arrayOfData.slice(indexOfFirstItem, indexOfLastItem) : null
+  // );
+
+  const arrayOfDataToDisplay = useMemo(() => {
+    return arrayOfData
+      ? arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
+      : null;
+  }, [arrayOfData, indexOfFirstItem, indexOfLastItem]);
 
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState("init");
@@ -51,15 +60,66 @@ function Table({
     }
   };
 
-  // const handleDisplay = () => {
-  //   setMaxPageOfItems(parseInt(data.length / itemPerPage));
-  //   setIndexOfLastItem(currentPage * itemPerPage);
-  //   setIndexOfFirstItem(indexOfLastItem - itemPerPage);
+  const handleDisplay = () => {
+    setMaxPageOfItems(parseInt(arrayOfData.length / itemPerPage));
+    setIndexOfLastItem(currentPage * itemPerPage);
+    setIndexOfFirstItem(indexOfLastItem - itemPerPage);
+    // setArrayOfDataToDisplay(
+    //   arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
+    // );
+  };
 
-  //   setArrayOfDataToDisplay(
-  //     arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
-  //   );
-  // };
+  const refreshArray = useCallback(
+    (reset) => {
+      // handleDisplay();
+      console.log("Call refreshArray");
+      reset && setArrayOfData(data);
+      setMaxPageOfItems(parseInt(arrayOfData.length / itemPerPage));
+      setIndexOfLastItem(currentPage * itemPerPage);
+      setIndexOfFirstItem(indexOfLastItem - itemPerPage);
+      // setArrayOfDataToDisplay(
+      //   arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
+      // );
+    },
+    [
+      // handleDisplay,
+      data,
+      currentPage,
+      itemPerPage,
+      indexOfLastItem,
+      arrayOfData,
+    ]
+  );
+
+  const handleNavigation = (action, page = 1) => {
+    switch (action) {
+      case "RESET":
+        setArrayOfData(data);
+        setItemPerPage(rowPagination);
+        setCurrentPage(1);
+        console.log("before " + currentPage);
+        // handleDisplay();
+        break;
+      case "FIRST":
+        setCurrentPage(1);
+        break;
+      case "PREVIOUS":
+        break;
+      case "NEXT":
+        break;
+      case "LAST":
+        setCurrentPage(maxPageOfItems);
+        break;
+      case "SET":
+        console.log(page);
+        setCurrentPage(page);
+        // handleDisplay();
+        break;
+
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     // Trie les données en fonction de la colonne et de l'ordre de tri
@@ -76,9 +136,9 @@ function Table({
       });
 
       setArrayOfData(sortedData);
-      setArrayOfDataToDisplay(
-        arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
-      );
+      // setArrayOfDataToDisplay(
+      //   arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
+      // );
     }
   }, [
     sortColumn,
@@ -90,19 +150,21 @@ function Table({
   ]);
 
   useEffect(() => {
-    setMaxPageOfItems(parseInt(data.length / itemPerPage));
-    setIndexOfLastItem(currentPage * itemPerPage);
-    setIndexOfFirstItem(indexOfLastItem - itemPerPage);
-    setArrayOfDataToDisplay(
-      arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
-    );
+    // setMaxPageOfItems(parseInt(data.length / itemPerPage));
+    // setIndexOfLastItem(currentPage * itemPerPage);
+    // setIndexOfFirstItem(indexOfLastItem - itemPerPage);
+    // setArrayOfDataToDisplay(
+    //   arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
+    // );
+    refreshArray();
   }, [
-    currentPage,
-    data,
-    itemPerPage,
-    indexOfLastItem,
-    indexOfFirstItem,
-    arrayOfData,
+    refreshArray,
+    // currentPage,
+    // data,
+    // itemPerPage,
+    // indexOfLastItem,
+    // indexOfFirstItem,
+    // arrayOfData,
   ]);
 
   return (
@@ -191,11 +253,14 @@ function Table({
           {/* BUTTON RESET */}
           <i
             className="fa-solid fa-arrow-rotate-right"
-            onClick={() => {
-              setArrayOfData(data);
-              setItemPerPage(rowPagination);
-              setCurrentPage(1);
-            }}
+            // onClick={() => {
+            //   setArrayOfData(data);
+            //   setItemPerPage(rowPagination);
+            //   setCurrentPage(1);
+            // }}
+            // onClick={() => handleNavigation("RESET")}
+            // onClick={refreshArray}
+            onClick={() => refreshArray(true)}
           ></i>
 
           {/* MAIN NAVIGATION BUTTON */}
@@ -203,7 +268,8 @@ function Table({
             {/* SELECT PAGE */}
             <select
               value={currentPage}
-              onChange={(e) => setCurrentPage(e.target.value)}
+              // onChange={(e) => setCurrentPage(e.target.value)}
+              onChange={(e) => handleNavigation("SET", e.target.value)}
             >
               {Array.from({ length: maxPageOfItems + 1 }).map((_, index) => {
                 return <option key={"page-" + (index + 1)}>{index + 1}</option>;
