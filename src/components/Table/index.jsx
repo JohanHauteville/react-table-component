@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import "./styles.scss";
 
 function Table({
@@ -11,12 +11,16 @@ function Table({
   rowPagination,
   labelPerPage,
 }) {
+  // USESTATES
   const [itemPerPage, setItemPerPage] = useState(
     rowPagination ? rowPagination : 10
   );
   const [arrayOfData, setArrayOfData] = useState(data ? data : null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState("init");
 
+  // USEMEMOS
   const indexOfLastItem = useMemo(() => {
     return currentPage * itemPerPage;
   }, [currentPage, itemPerPage]);
@@ -26,52 +30,46 @@ function Table({
   const maxPageOfItems = useMemo(() => {
     return arrayOfData ? parseInt(arrayOfData.length / itemPerPage) : null;
   }, [itemPerPage, arrayOfData]);
-
   const arrayOfDataToDisplay = useMemo(() => {
-    // console.log("useMemo");
-    // console.log(
-    //   "first index: " + indexOfFirstItem + " last index: " + indexOfLastItem
-    // );
     return arrayOfData
       ? arrayOfData.slice(indexOfFirstItem, indexOfLastItem)
       : null;
   }, [arrayOfData, indexOfFirstItem, indexOfLastItem]);
 
-  const [sortColumn, setSortColumn] = useState(null);
-  const [sortOrder, setSortOrder] = useState("init");
-
+  // RESEARCH FUNCTION
   const handleSearchBar = (e) => {
-    let temporaryArray = [];
-    if (e.currentTarget.value.length > 3) {
-      console.log(e.currentTarget.value);
-      // arrayOfData.map((row) => console.log(row));
-      // temporaryArray = arrayOfData.filter((row) => row[0] === e.currentTarget);
-
-      console.log(temporaryArray);
-    }
-  };
-
-  const handleSort = (column) => {
-    // Si la colonne est déjà triée, changez l'ordre de tri
-    console.log(sortOrder);
-
-    if (sortColumn === column) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-      console.log(sortOrder);
+    const searchTerm = e.currentTarget.value.toLowerCase();
+    if (e.currentTarget.value.length > 1) {
+      const filteredData = arrayOfData.filter((row) => {
+        return listToDisplay.some((item) => {
+          const cellValue = String(row[item.dataName]).toLowerCase();
+          return cellValue.includes(searchTerm);
+        });
+      });
+      setArrayOfData(filteredData);
     } else {
-      // Si c'est une nouvelle colonne, triez par ordre ascendant
-      setSortColumn(column);
-      setSortOrder("asc");
+      setArrayOfData(data);
     }
   };
 
-  // TRI DES DONNÉES DES COLONNES
-  useEffect(() => {
-    // Trie les données en fonction de la colonne et de l'ordre de tri
-    if (sortColumn) {
-      const sortedData = [...data].sort((a, b) => {
-        const aValue = a[sortColumn] || "";
-        const bValue = b[sortColumn] || "";
+  // SORT FUNCTION
+  const handleSort = useCallback(
+    (column) => {
+      // Si la colonne est déjà triée, changez l'ordre de tri
+      console.log(sortOrder);
+
+      if (sortColumn === column) {
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        console.log(sortOrder);
+      } else {
+        // Si c'est une nouvelle colonne, triez par ordre ascendant
+        setSortColumn(column);
+        setSortOrder("asc");
+      }
+      // Trie les données en fonction de la colonne et de l'ordre de tri
+      const sortedData = [...arrayOfData].sort((a, b) => {
+        const aValue = a[column] || "";
+        const bValue = b[column] || "";
 
         if (sortOrder === "asc") {
           return aValue.localeCompare(bValue);
@@ -81,8 +79,9 @@ function Table({
       });
 
       setArrayOfData(sortedData);
-    }
-  }, [sortColumn, sortOrder, data]);
+    },
+    [sortColumn, sortOrder, arrayOfData]
+  );
 
   return (
     <div className="table__container">
@@ -93,7 +92,6 @@ function Table({
         // style={{ backgroundColor: primaryColor }}
       >
         {/* TITLE */}
-
         {tableTitle && <h3 style={{ color: fontHeaderColor }}>{tableTitle}</h3>}
 
         {/* RESEARCH BAR */}
@@ -159,7 +157,7 @@ function Table({
         </table>
 
         {/* MESSAGE IF NO DATA */}
-        {!arrayOfDataToDisplay && (
+        {arrayOfDataToDisplay.length <= 0 && (
           <div className="table__notification">No data available</div>
         )}
       </div>
@@ -172,6 +170,7 @@ function Table({
             className="fa-solid fa-arrow-rotate-right"
             onClick={() => {
               setArrayOfData(data);
+              setItemPerPage(rowPagination ? rowPagination : 10);
               setCurrentPage(1);
             }}
           ></i>
@@ -216,20 +215,22 @@ function Table({
             {/* ACTUAL PAGE */}
             <div>
               {indexOfFirstItem + 1} to{" "}
-              {indexOfLastItem > data.length ? data.length : indexOfLastItem} of{" "}
-              {data.length}
+              {indexOfLastItem > arrayOfData.length
+                ? arrayOfData.length
+                : indexOfLastItem}{" "}
+              of {arrayOfData.length}
             </div>
 
             {/* BUTTON NEXT PAGE */}
             <i
               className={
-                indexOfLastItem > data.length
+                indexOfLastItem > arrayOfData.length
                   ? "fa-solid fa-chevron-right desactivated"
                   : "fa-solid fa-chevron-right"
               }
               onClick={() =>
                 setCurrentPage(
-                  indexOfLastItem > data.length
+                  indexOfLastItem > arrayOfData.length
                     ? currentPage
                     : parseInt(currentPage) + 1
                 )
@@ -239,7 +240,7 @@ function Table({
             {/* BUTTON LAST PAGE */}
             <i
               className={
-                indexOfLastItem > data.length
+                indexOfLastItem > arrayOfData.length
                   ? "fa-solid fa-angles-right desactivated"
                   : "fa-solid fa-angles-right"
               }
