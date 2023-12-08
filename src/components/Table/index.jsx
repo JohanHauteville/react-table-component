@@ -1,3 +1,10 @@
+/**
+ *  Represents a React Table Component
+ *
+ *  @author Johan Hauteville
+ *  @version 1.0
+ */
+
 import { useState, useMemo, useCallback } from "react";
 import "./styles.scss";
 
@@ -5,9 +12,13 @@ function Table({
   data,
   listToDisplay,
   tableTitle,
-  fontHeaderColor,
-  primaryColor,
   classHeader,
+  classHeaderTitle,
+  classTableContainer,
+  classTableHeader,
+  classTableContent,
+  classTablePagination,
+  classTableComponent,
   rowPagination,
   labelPerPage,
 }) {
@@ -50,49 +61,61 @@ function Table({
     } else {
       setArrayOfData(data);
     }
+    setCurrentPage(1);
   };
 
-  // SORT FUNCTION
+  /**
+   * Used to sort data.
+   *
+   * @param column The column that will be used to sort the entire data set of the table
+   * @return sortedData - Sorted Data will be set with "setArrayOfData"
+   */
   const handleSort = useCallback(
     (column) => {
-      // Si la colonne est déjà triée, changez l'ordre de tri
-      console.log(sortOrder);
-
+      // If column already sorted, order will be changed
       if (sortColumn === column) {
         setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-        console.log(sortOrder);
       } else {
-        // Si c'est une nouvelle colonne, triez par ordre ascendant
+        // If it's a new column, sort will be ascendant
         setSortColumn(column);
         setSortOrder("asc");
       }
-      // Trie les données en fonction de la colonne et de l'ordre de tri
+      // Datas will be sorted thanks to the column and the order.
       const sortedData = [...arrayOfData].sort((a, b) => {
         const aValue = a[column] || "";
         const bValue = b[column] || "";
-
         if (sortOrder === "asc") {
           return aValue.localeCompare(bValue);
         } else {
           return bValue.localeCompare(aValue);
         }
       });
-
       setArrayOfData(sortedData);
     },
     [sortColumn, sortOrder, arrayOfData]
   );
 
   return (
-    <div className="table__container">
+    <div
+      className={
+        classTableContainer
+          ? `table__container ${classTableContainer}`
+          : "table__container"
+      }
+    >
       {console.log("Rendu Table component")}
       {/* COMPONENT HEADER */}
       <div
-        className={`table__header ${classHeader}`}
-        // style={{ backgroundColor: primaryColor }}
+        className={
+          classHeader ? `table__header ${classHeader}` : "table__header"
+        }
       >
         {/* TITLE */}
-        {tableTitle && <h3 style={{ color: fontHeaderColor }}>{tableTitle}</h3>}
+        {tableTitle && (
+          <h3 className={classHeaderTitle ? classHeaderTitle : ""}>
+            {tableTitle}
+          </h3>
+        )}
 
         {/* RESEARCH BAR */}
         <div className="table__header--research-input">
@@ -101,13 +124,29 @@ function Table({
         </div>
       </div>
 
-      <div className="table-content">
+      {/* CONTENT */}
+      <div
+        className={
+          classTableContent
+            ? `table-content ${classTableContent}`
+            : "table-content"
+        }
+      >
         {/* TABLE */}
-        <table className="table-component">
+        <table
+          className={
+            classTableComponent
+              ? `table-component ${classTableComponent}`
+              : "table-component"
+          }
+        >
           {/* TABLE HEADER */}
           <thead
-            className="table-component__header"
-            style={{ color: fontHeaderColor, backgroundColor: primaryColor }}
+            className={
+              classTableHeader
+                ? `table-component__header ${classTableHeader}`
+                : "table-component__header"
+            }
           >
             <tr>
               {listToDisplay?.map((item, index) => {
@@ -115,7 +154,13 @@ function Table({
                   <th key={"header-" + index + item.dataName}>
                     {item.displayName}
                     <i
-                      className="fa-solid fa-arrows-up-down"
+                      className={
+                        sortColumn === item.dataName
+                          ? sortOrder === "asc"
+                            ? "fa-solid fa-arrow-up-wide-short"
+                            : "fa-solid fa-arrow-down-short-wide "
+                          : "fa-solid fa-arrows-up-down"
+                      }
                       onClick={() => handleSort(item.dataName)}
                     ></i>
                   </th>
@@ -164,7 +209,13 @@ function Table({
 
       {/* PAGINATION */}
       {arrayOfDataToDisplay && (
-        <div className="table__pagination">
+        <div
+          className={
+            classTablePagination
+              ? `table__pagination ${classTablePagination}`
+              : "table__pagination"
+          }
+        >
           {/* BUTTON RESET */}
           <i
             className="fa-solid fa-arrow-rotate-right"

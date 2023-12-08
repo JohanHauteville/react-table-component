@@ -18,6 +18,7 @@ root.render(
       labelPerPage={"Employees"}
       // fontHeaderColor={"#fff"}
       classHeader={"new-class-header"}
+      // classTableContainer={"new-class-container"}
     />
   </React.StrictMode>
 );

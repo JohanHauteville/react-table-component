@@ -105,7 +105,9 @@
   padding: 0 15px;
   cursor: pointer;
 }
-.fa-arrows-up-down {
+.fa-arrows-up-down,
+.fa-arrow-up-wide-short,
+.fa-arrow-down-short-wide {
   padding-left: 10px;
   color: #0000004d;
   cursor: pointer;
@@ -126,4 +128,9 @@
 .new-class-header {
   color: #fff;
   background-color: #a2b064;
+  // font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.new-class-container {
+  font-family: "Times New Roman", Times, serif;
 }
