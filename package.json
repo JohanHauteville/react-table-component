@@ -1,7 +1,23 @@
 {
   "name": "react-table-component",
-  "version": "0.1.0",
-  "private": true,
+  "description": "Ease to use table component",
+  "author": "Hauteville Johan",
+  "version": "1.0.0",
+  "private": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JohanHauteville/react-table-component"
+  },
+  "keywords": [
+    "react table",
+    "react table component",
+    "table component",
+    "hauteville"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -14,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -35,5 +51,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5"
   }
 }
