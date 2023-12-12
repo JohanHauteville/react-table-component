@@ -103,7 +103,6 @@ function Table({
           : "table__container"
       }
     >
-      {console.log("Rendu Table component")}
       {/* COMPONENT HEADER */}
       <div
         className={
@@ -202,7 +201,7 @@ function Table({
         </table>
 
         {/* MESSAGE IF NO DATA */}
-        {arrayOfDataToDisplay.length <= 0 && (
+        {!arrayOfDataToDisplay && (
           <div className="table__notification">No data available</div>
         )}
       </div>

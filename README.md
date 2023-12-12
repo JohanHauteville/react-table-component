@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 vers 1.0.2 : Fix React import
+vers 1.0.3 : Fix Table Length
 
 ### `yarn start`
 
