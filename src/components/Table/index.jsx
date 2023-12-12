@@ -2,9 +2,9 @@
  *  Represents a React Table Component
  *
  *  @author Johan Hauteville
- *  @version 1.0
+ *  @version 1.0.2
  */
-
+import React from "react";
 import { useState, useMemo, useCallback } from "react";
 import "./styles.scss";
 

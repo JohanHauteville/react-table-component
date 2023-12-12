@@ -1,8 +1,8 @@
 {
-  "name": "react-table-component",
+  "name": "easy-react-table-component",
   "description": "Ease to use table component",
   "author": "Hauteville Johan",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": false,
   "files": [
     "dist",
@@ -13,6 +13,7 @@
     "url": "https://github.com/JohanHauteville/react-table-component"
   },
   "keywords": [
+    "react",
     "react table",
     "react table component",
     "table component",
