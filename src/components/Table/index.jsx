@@ -2,7 +2,7 @@
  *  Represents a React Table Component
  *
  *  @author Johan Hauteville
- *  @version 1.0.2
+ *  @version 1.0.5
  */
 import React from "react";
 import { useState, useMemo, useCallback } from "react";
@@ -12,6 +12,7 @@ function Table({
   data,
   listToDisplay,
   tableTitle,
+  researchBar = true,
   classHeader,
   classHeaderTitle,
   classTableContainer,
@@ -117,10 +118,12 @@ function Table({
         )}
 
         {/* RESEARCH BAR */}
-        <div className="table__header--research-input">
-          <input type="text" onChange={handleSearchBar} />
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </div>
+        {arrayOfData && researchBar === true && (
+          <div className="table__header--research-input">
+            <input type="text" onChange={handleSearchBar} />
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </div>
+        )}
       </div>
 
       {/* CONTENT */}
