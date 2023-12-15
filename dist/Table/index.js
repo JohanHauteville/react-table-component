@@ -18,7 +18,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
  *  Represents a React Table Component
  *
  *  @author Johan Hauteville
- *  @version 1.0.2
+ *  @version 1.0.5
  */
 
 function Table(_ref) {
@@ -26,6 +26,7 @@ function Table(_ref) {
     data,
     listToDisplay,
     tableTitle,
+    researchBar = true,
     classHeader,
     classHeaderTitle,
     classTableContainer,
@@ -107,7 +108,7 @@ function Table(_ref) {
     className: classHeader ? "table__header ".concat(classHeader) : "table__header"
   }, tableTitle && /*#__PURE__*/_react.default.createElement("h3", {
     className: classHeaderTitle ? classHeaderTitle : ""
-  }, tableTitle), /*#__PURE__*/_react.default.createElement("div", {
+  }, tableTitle), arrayOfData && researchBar === true && /*#__PURE__*/_react.default.createElement("div", {
     className: "table__header--research-input"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",

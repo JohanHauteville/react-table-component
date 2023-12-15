@@ -6,8 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-vers 1.0.2 : Fix React import
-vers 1.0.4 : Fix Table Length
+ver 1.0.2 : Fix React import
+ver 1.0.4 : Fix Table Length
+ver 1.0.5 : Fix research Bar error when there's no data
 
 ### `yarn start`
 
