@@ -2,11 +2,12 @@
  *  Represents a React Table Component
  *
  *  @author Johan Hauteville
- *  @version 1.0.5
+ *  @version 1.0.6
  */
 import React from "react";
 import { useState, useMemo, useCallback } from "react";
 import "./styles.scss";
+import { flatten } from "ramda";
 
 function Table({
   data,
@@ -27,7 +28,11 @@ function Table({
   const [itemPerPage, setItemPerPage] = useState(
     rowPagination ? rowPagination : 10
   );
-  const [arrayOfData, setArrayOfData] = useState(data ? data : null);
+  const flattenData = flatten(data);
+  console.log(flattenData);
+  const [arrayOfData, setArrayOfData] = useState(
+    flattenData ? flattenData : null
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState("init");
@@ -60,7 +65,7 @@ function Table({
       });
       setArrayOfData(filteredData);
     } else {
-      setArrayOfData(data);
+      setArrayOfData(flattenData);
     }
     setCurrentPage(1);
   };
@@ -222,7 +227,7 @@ function Table({
           <i
             className="fa-solid fa-arrow-rotate-right"
             onClick={() => {
-              setArrayOfData(data);
+              setArrayOfData(flattenData);
               setItemPerPage(rowPagination ? rowPagination : 10);
               setCurrentPage(1);
             }}

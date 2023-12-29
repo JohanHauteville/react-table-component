@@ -1,14 +1,15 @@
-# Getting Started with Create React App
+# Easy-react-table-component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An easy-to-use and customizable React table component!
 
-## Available Scripts
+## Change log
 
 In the project directory, you can run:
 
 ver 1.0.2 : Fix React import
 ver 1.0.4 : Fix Table Length
 ver 1.0.5 : Fix research Bar error when there's no data
+ver 1.0.6 : Add Ramda Librairie to flatten data
 
 ### `yarn start`
 
