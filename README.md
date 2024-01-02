@@ -10,6 +10,9 @@ ver 1.0.2 : Fix React import
 ver 1.0.4 : Fix Table Length
 ver 1.0.5 : Fix research Bar error when there's no data
 ver 1.0.6 : Add Ramda Librairie to flatten data
+ver 1.0.7 : Fix error on flatten data
+ver 1.0.8 : Fix flatten data with mergeAll
+ver 1.0.9 : Fix error on empty data
 
 ### `yarn start`
 

@@ -10,7 +10,7 @@ root.render(
     {/* <App /> */}
     <Table
       tableTitle={"Employees"}
-      data={EMPLOYEES_DATA}
+      // data={EMPLOYEES_DATA}
       listToDisplay={LIST_TO_DISPLAY}
       rowPagination={10}
       labelPerPage={"Employees"}

@@ -2,12 +2,12 @@
  *  Represents a React Table Component
  *
  *  @author Johan Hauteville
- *  @version 1.0.6
+ *  @version 1.0.9
  */
 import React from "react";
 import { useState, useMemo, useCallback } from "react";
 import "./styles.scss";
-import { flatten } from "ramda";
+import { mergeAll, toPairs, filter, is } from "ramda";
 
 function Table({
   data,
@@ -24,14 +24,27 @@ function Table({
   rowPagination,
   labelPerPage,
 }) {
+  // Function to flatten datas
+  function flattenObject(obj) {
+    return mergeAll(
+      filter(is(Object), toPairs(obj)).map(([key, value]) =>
+        is(Object, value) ? flattenObject(value) : { [key]: value }
+      )
+    );
+  }
   // USESTATES
   const [itemPerPage, setItemPerPage] = useState(
     rowPagination ? rowPagination : 10
   );
-  const flattenData = flatten(data);
-  console.log(flattenData);
+  let rawData = [];
+  data &&
+    data.forEach((profile) => {
+      rawData.push(flattenObject(profile));
+    });
+
+  const flattenData = rawData;
   const [arrayOfData, setArrayOfData] = useState(
-    flattenData ? flattenData : null
+    flattenData.length > 0 ? flattenData : null
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [sortColumn, setSortColumn] = useState(null);

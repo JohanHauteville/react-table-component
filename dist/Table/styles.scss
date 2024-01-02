@@ -1,0 +1,136 @@
+.table {
+  &__container {
+    width: 100%;
+  }
+  &__header {
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    background-color: #f8f9f4;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #e5e6e1;
+    h3 {
+      margin: 0;
+    }
+    &--research-input {
+      position: relative;
+      margin-left: auto;
+
+      input {
+        height: 30px;
+        border: 1px solid #e5e6e1;
+        border-radius: 5px;
+        padding-left: 30px;
+      }
+    }
+  }
+  &-content {
+    overflow-x: scroll;
+  }
+  &__notification {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__pagination {
+    color: #525252;
+    font-size: 14px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e6e1;
+    &--main-buttons,
+    &--items-per-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        font-size: 12px;
+      }
+      select {
+        margin: 0 30px 0 10px;
+      }
+    }
+  }
+}
+
+.table-component {
+  width: 100%;
+  padding: 0 20px;
+  border-collapse: collapse;
+
+  &__header {
+    font-size: 14px;
+    height: 50px;
+    text-align: left;
+    background-color: #f8f9f4;
+    margin: 0;
+    border-bottom: 1px solid #e5e6e1;
+  }
+  &__row {
+    font-size: 14px;
+    white-space: nowrap;
+    height: 50px;
+    border-bottom: 1px solid #e5e6e1;
+    margin-left: 80px;
+    &:hover {
+      background-color: #e5e6e148;
+    }
+  }
+
+  td,
+  th {
+    min-width: 50px;
+    padding-left: 20px;
+    white-space: nowrap;
+  }
+}
+
+// .fa-solid {
+//   padding: 0 15px;
+//   cursor: pointer;
+// }
+.desactivated {
+  color: #b9b9b9;
+  cursor: inherit;
+}
+.fa-angles-right,
+.fa-chevron-right,
+.fa-chevron-left,
+.fa-angles-left {
+  padding: 0 15px;
+  cursor: pointer;
+}
+.fa-arrows-up-down,
+.fa-arrow-up-wide-short,
+.fa-arrow-down-short-wide {
+  padding-left: 10px;
+  color: #0000004d;
+  cursor: pointer;
+}
+.fa-arrow-rotate-right {
+  margin-left: 20px;
+  // color: #0000004d;
+  cursor: pointer;
+}
+.fa-magnifying-glass {
+  position: absolute;
+  left: 10px;
+  top: 30%;
+  font-size: 16px;
+  color: #b9b9b9;
+}
+
+.new-class-header {
+  color: #fff;
+  background-color: #a2b064;
+  // font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+// .new-class-container {
+//   font-family: "Times New Roman", Times, serif;
+// }
