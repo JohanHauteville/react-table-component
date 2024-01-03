@@ -1,8 +1,33 @@
 /**
- *  Represents a React Table Component
  *
- *  @author Johan Hauteville
- *  @version 1.1.0
+ * @name easy-react-table-component
+ * @description Create a React Table Component
+ *
+ * @author Johan Hauteville
+ * @version 1.1.0
+ *
+ * @installation
+ * // Installation via npm
+ * // npm install easy-react-table-component
+ *
+ * // Import in a React file
+ * // import Table from 'easy-react-table-component';
+ *
+ * @component
+ * @param {JSON} data
+ * @param {JSON} listToDisplay For each Object : "dataName" represents the data and "displayName" is the name displayed. ex: {dataName: "firstName", displayName: "First Name"}
+ * @param {String} tableTitle represents the table title name
+ * @param {Boolean} researchBar true: display the research input. false: hide the research input
+ * @param {String} classHeader used for styling the header
+ * @param {String} classHeaderTitle used for styling the header title
+ * @param {String} classTableContainer used for styling the table container
+ * @param {String} classTableHeader used for styling the table header
+ * @param {String} classTableContent used for styling the table content
+ * @param {String} classTablePagination used for styling the table pagination
+ * @param {String} classTableComponent used for styling the table component
+ * @param {Number} rowPagination represent the number of row per page (10 by default)
+ * @param {String} labelPerPage represent the displayed name of item per page ("Items per page" by default)
+ * @returns {JSX.Element} Table component
  */
 import React from "react";
 import { useState, useMemo, useCallback } from "react";
