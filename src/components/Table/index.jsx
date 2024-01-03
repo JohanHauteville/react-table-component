@@ -236,29 +236,31 @@ function Table({
               : "table__pagination"
           }
         >
-          {/* BUTTON RESET */}
-          <i
-            className="fa-solid fa-arrow-rotate-right"
-            onClick={() => {
-              setArrayOfData(flattenData);
-              setItemPerPage(rowPagination ? rowPagination : 10);
-              setCurrentPage(1);
-            }}
-          ></i>
-
-          {/* MAIN NAVIGATION BUTTON */}
-          <div className="table__pagination--main-buttons">
+          {/* BUTTON RESET AND SELECT PAGE */}
+          <div>
+            {/* BUTTON RESET */}
+            <i
+              className="fa-solid fa-arrow-rotate-right"
+              onClick={() => {
+                setArrayOfData(flattenData);
+                setItemPerPage(rowPagination ? rowPagination : 10);
+                setCurrentPage(1);
+              }}
+            ></i>
             {/* SELECT PAGE */}
             <select
+              className="table__pagination--select-page"
               value={currentPage}
-              // onChange={(e) => handleNavigation("SET", e.target.value)
               onChange={(e) => setCurrentPage(e.target.value)}
             >
               {Array.from({ length: maxPageOfItems + 1 }).map((_, index) => {
                 return <option key={"page-" + (index + 1)}>{index + 1}</option>;
               })}
             </select>
+          </div>
 
+          {/* MAIN NAVIGATION BUTTON */}
+          <div className="table__pagination--main-buttons">
             {/* BUTTON FIRST PAGE */}
             <i
               className={
@@ -284,7 +286,7 @@ function Table({
             ></i>
 
             {/* ACTUAL PAGE */}
-            <div>
+            <div className="table__pagination--page-notification">
               {indexOfFirstItem + 1} to{" "}
               {indexOfLastItem > arrayOfData.length
                 ? arrayOfData.length

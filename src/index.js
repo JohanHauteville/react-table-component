@@ -10,13 +10,13 @@ root.render(
     {/* <App /> */}
     <Table
       tableTitle={"Employees"}
-      // data={EMPLOYEES_DATA}
+      data={EMPLOYEES_DATA}
       listToDisplay={LIST_TO_DISPLAY}
       rowPagination={10}
       labelPerPage={"Employees"}
       // fontHeaderColor={"#fff"}
       classHeader={"new-class-header"}
-      researchBar={false}
+      // researchBar={false}
       // classTableContainer={"new-class-container"}
     />
   </React.StrictMode>

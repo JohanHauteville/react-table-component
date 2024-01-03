@@ -55,6 +55,29 @@
         margin: 0 30px 0 10px;
       }
     }
+    &--page-notification {
+      font-size: 14px;
+    }
+    &--select-page {
+      margin: 0 15px;
+    }
+    @media (max-width: 600px) {
+      &--main-buttons,
+      &--items-per-page {
+        p {
+          display: none;
+        }
+        select {
+          margin: 0 10px 0 10px;
+        }
+      }
+      &--page-notification {
+        font-size: 12px;
+      }
+      &--select-page {
+        margin: 0 10px;
+      }
+    }
   }
 }
 
@@ -90,10 +113,6 @@
   }
 }
 
-// .fa-solid {
-//   padding: 0 15px;
-//   cursor: pointer;
-// }
 .desactivated {
   color: #b9b9b9;
   cursor: inherit;
@@ -104,6 +123,9 @@
 .fa-angles-left {
   padding: 0 15px;
   cursor: pointer;
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
 }
 .fa-arrows-up-down,
 .fa-arrow-up-wide-short,
@@ -114,8 +136,10 @@
 }
 .fa-arrow-rotate-right {
   margin-left: 20px;
-  // color: #0000004d;
   cursor: pointer;
+  @media (max-width: 600px) {
+    margin-left: 10px;
+  }
 }
 .fa-magnifying-glass {
   position: absolute;
@@ -128,9 +152,4 @@
 .new-class-header {
   color: #fff;
   background-color: #a2b064;
-  // font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
-// .new-class-container {
-//   font-family: "Times New Roman", Times, serif;
-// }
