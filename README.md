@@ -13,6 +13,7 @@ ver 1.0.6 : Add Ramda Librairie to flatten data
 ver 1.0.7 : Fix error on flatten data
 ver 1.0.8 : Fix flatten data with mergeAll
 ver 1.0.9 : Fix error on empty data
+ver 1.1.0 : Update responsivity
 
 ### `yarn start`
 
