@@ -16,10 +16,35 @@ var _ramda = require("ramda");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /**
- *  Represents a React Table Component
  *
- *  @author Johan Hauteville
- *  @version 1.1.0
+ * @name easy-react-table-component
+ * @description Create a React Table Component
+ *
+ * @author Johan Hauteville
+ * @version 1.1.1
+ *
+ * @installation
+ * // Installation via npm
+ * // npm install easy-react-table-component
+ *
+ * // Import in a React file
+ * // import Table from 'easy-react-table-component';
+ *
+ * @component
+ * @param {JSON} data
+ * @param {JSON} listToDisplay For each Object : "dataName" represents the data and "displayName" is the name displayed. ex: {dataName: "firstName", displayName: "First Name"}
+ * @param {String} tableTitle represents the table title name
+ * @param {Boolean} researchBar true: display the research input. false: hide the research input
+ * @param {String} classHeader used for styling the header
+ * @param {String} classHeaderTitle used for styling the header title
+ * @param {String} classTableContainer used for styling the table container
+ * @param {String} classTableHeader used for styling the table header
+ * @param {String} classTableContent used for styling the table content
+ * @param {String} classTablePagination used for styling the table pagination
+ * @param {String} classTableComponent used for styling the table component
+ * @param {Number} rowPagination represent the number of row per page (10 by default)
+ * @param {String} labelPerPage represent the displayed name of item per page ("Items per page" by default)
+ * @returns {JSX.Element} Table component
  */
 
 function Table(_ref) {

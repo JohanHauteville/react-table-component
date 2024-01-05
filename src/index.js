@@ -12,7 +12,7 @@ root.render(
       tableTitle={"Employees"}
       data={EMPLOYEES_DATA}
       listToDisplay={LIST_TO_DISPLAY}
-      rowPagination={10}
+      rowPagination={7}
       labelPerPage={"Employees"}
       // fontHeaderColor={"#fff"}
       classHeader={"new-class-header"}

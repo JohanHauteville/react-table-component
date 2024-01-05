@@ -4,7 +4,7 @@
  * @description Create a React Table Component
  *
  * @author Johan Hauteville
- * @version 1.1.0
+ * @version 1.1.1
  *
  * @installation
  * // Installation via npm
